@@ -1,0 +1,77 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+{% block title %}
+{% trans 'Checkout' %}
+{% endblock %}
+
+<div class="order-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{% trans 'Checkout' %}</h1>
+                <form action="." method="POST" class="order-form">
+                    {{ form.as_p }}
+                    <p><input type="submit" value="{% trans 'Place Order' %}"></p>
+                    {% csrf_token %}
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h3>{% trans 'Your Order' %}</h3>
+                <ul>
+
+                    {% for item in cart %}
+                    <hr>
+                    <div class="checkout">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}"
+                                    alt="" class="checkout-image">
+                            </div>
+                            <div class="col-md-6">
+                                <li class="checkout-margin-top-align">
+                                    <h3>{{ item.product.name }}</h3>
+                                    <p>Quantity: {{ item.quantity }} </p>
+                                    <p>$ {{ item.total_price }}</p>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    {% if cart.coupon %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Coupon code</h4>
+                            {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                            <li>
+                                "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                            </li>
+                            {% endblocktrans %}
+                        </div>
+                        <div class="col-md-6">
+                            <li>
+                                <span>- $ {{ cart.get_discount | floatformat:"2" }}</span>
+                            </li>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>{% trans 'Total' %}:</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>$ {{ cart.get_total_price_after_discount | floatformat:"2" }}</h4>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-06 22:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cart/forms.py:11
+msgid "Quantity"
+msgstr ""
+
+#: coupons/forms.py:6
+msgid "Coupon"
+msgstr ""
+
+#: onlinestore/settings.py:120
+msgid "English"
+msgstr "English"
+
+#: onlinestore/settings.py:121
+msgid "Spanish"
+msgstr "Spanish"
+
+#: onlinestore/settings.py:122
+msgid "Simplified Chinese"
+msgstr "Chinese"
+
+#: onlinestore/urls.py:9
+msgid "admin/"
+msgstr ""
+
+#: onlinestore/urls.py:10
+msgid "cart/"
+msgstr ""
+
+#: onlinestore/urls.py:11
+msgid "orders/"
+msgstr ""
+
+#: onlinestore/urls.py:12
+msgid "payment/"
+msgstr ""
+
+#: onlinestore/urls.py:14
+msgid "coupons/"
+msgstr ""
+
+#: payment/urls.py:8
+msgid "process/"
+msgstr ""
+
+#: payment/urls.py:9
+msgid "done/"
+msgstr ""
+
+#: payment/urls.py:10
+msgid "canceled/"
+msgstr ""
+
+#: shop/templates/shop/base.html:11
+msgid "Zaq Stores"
+msgstr "Zaq Stores"
+
+#: shop/templates/shop/navbar.html:31
+msgid "Language"
+msgstr ""
+
+#: shop/templates/shop/navbar.html:52
+#, python-format
+msgid ""
+"\n"
+"                            <i class=\"fas fa-shopping-cart\">\n"
+"                            </i>\n"
+"                            %(total_items)s Item%(total_items_plural)s\n"
+"                            "
+msgstr ""
+
+#: shop/templates/shop/navbar.html:61
+msgid "0"
+msgstr ""
+
+#: shop/templates/shop/product/product-page.html:61
+msgid "Add to Cart"
+msgstr ""

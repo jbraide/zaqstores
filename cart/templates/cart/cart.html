@@ -1,0 +1,129 @@
+{% extends 'shop/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="cart">
+        <div class="cart-header">
+            <h2>Cart</h2>
+        </div>
+        <div class="cart-added">
+
+            <h4><span class="fa fa-check-circle"></span> Cart Updated</h4>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <th></th>
+                <th>PRODUCT</th>
+                <th>PRICE</th>
+                <th>QUANTITY</th>
+                <th>TOTAL</th>
+
+
+                {% for item in cart %}
+                {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static '/images/black-and-white-close-up-colors-1407354.jpg' %} {% endif %}"
+                                alt="" class="product-thumbnail">
+                        </a>
+                    </td>
+                    <td>
+                        <p>{{ product.name }}</p>
+                        <p>X <span>{{ item.quantity }}</span></p>
+                    </td>
+
+                    <td class="price">
+                        <p>$ {{ item.price }}</p>
+                    </td>
+                    <td class="quantity">
+                        <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quanity_form.update }}
+                            <input type="submit" value="Update">
+                            {% csrf_token %}
+                        </form>
+                    </td>
+                    <td class="total">
+                        <span>$ {{ item.total_price }}</span>
+                    </td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+
+            </table>
+        </div>
+
+        <!-- <hr> -->
+        <!-- {% if item in cart %}
+                    {% with product=item.product %}
+                    <td></td>
+                    <td>
+                        <input type="text">
+                        <a href="" class="btn btn-primary">APPLY COUPON</a>
+                        <a href="{% url 'shop:product_list' product.id %}" class="btn btn-primary">CONTINUE
+                            SHOPPING</a>
+                    </td>
+                    {% endwith %}
+                    {% else %} -->
+        <div class="container">
+            <div class="row">
+                <!-- row 1 -->
+                <div class="col-md-6">
+                    <td>
+                        <p>Apply a coupon: </p>
+                        <form action="{% url 'coupons:apply' %}" method="POST">
+                            {% csrf_token %}
+                            {{ coupon_apply_form}}
+                            <input type="submit" class="btn btn-primary">
+                        </form>
+                        <a href="#" class="btn btn-primary">CONTINUE
+                            SHOPPING</a>
+                </div>
+                <div class="col-md-6">
+                    {% if cart.coupon %}
+                    <h4>Cart Total</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>$ {{ cart.get_total_price }}</p>
+                        </div>
+
+
+                        <!-- row 2 -->
+
+                        <div class="col-md-6">
+                            <p>'{{ cart.coupon.code }}' coupon ({{ cart.coupon.discount }}% off)</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>$ {{ cart.get_discount|floatformat:'2' }}</p>
+                        </div>
+                        <hr>
+                        <!-- row 3 -->
+                        <div class="col-md-6">
+                            <p>Total</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>$ {{ cart.get_total_price_after_discount|floatformat:'2' }}</p>
+                        </div>
+                        <!-- row 4 -->
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- {% endif %} -->
+    </div>
+</div>
+{% endblock %}
